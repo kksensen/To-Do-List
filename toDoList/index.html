@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List</title>
+    
+    <link rel="stylesheet" href="./style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+   
+    <header class="main-header">
+        <h1>Meu Quadro de Tarefas</h1>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#">Todas as tarefas</a></li>
+            <li><a href="#">Filtros</a></li>
+        </ul>
+    </nav>
+    <main class="main-content">
+        <section id="new-task-section" class="task-section">
+            <h2>Adicionar Nova Tarefa</h2>
+            <form id="add-task-form">
+                <div class="form-control">
+                    <label for="task-title-input">Título:</label>
+                    <input type="text" id="task-title-input" placeholder="Digite o título da tarefa" required>
+                </div>
+                <div class="form-control">
+                    <label for="task-desc-input">Descrição:</label>
+                    <textarea id="task-desc-input" placeholder="Digite a descrição da tarefa" required></textarea>
+                </div>
+                <div class="form-control">
+                    <label for="task-priority-select">Prioridade:</label>
+                    <select id="task-priority-select" required>
+                        <option value="low">Baixa</option>
+                        <option value="medium">Média</option>
+                        <option value="high">Alta</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Adicionar Tarefa</button>
+            </form>
+        </section>
+
+        <section id="task-board" class="task-section">
+            <h2>Meu Quadro</h2>
+            <div class="task-board-container">
+                <div class="task-column" id="todo-column">
+                    <h3>A Fazer</h3>
+                    <div class="task-list" id="todo-list">
+                        <!-- Tarefas a fazer serão adicionadas aqui -->
+                    </div>
+                </div>
+                <div class="task-column" id="doing-column">
+                    <h3>Em Andamento</h3>
+                    <div class="task-list" id="doing-list">
+                        <!-- Tarefas em progresso serão adicionadas aqui -->
+                    </div>
+                    <div class="task-column" id="done-column">
+                    <h3>Concluídas</h3>
+                    <div class="task-list" id="done-list">
+                        <!-- Tarefas concluídas serão adicionadas aqui -->
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Meu Quadro de Tarefas - Desenvolvido por Sensen.</p>
+    </footer>
+</body>
+</html>

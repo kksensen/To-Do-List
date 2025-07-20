@@ -1,0 +1,319 @@
+/* --- 1. ESTILOS GLOBAIS E VARIÁVEIS --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+:root {
+    --cor-fundo: #121212;
+    --cor-superficie: #1E1E1E;
+    --cor-texto-principal: #FFFFFF;
+    --cor-texto-secundario: #A9A9A9;
+    --cor-borda: #333333;
+    --cor-excluir-hover: #D32F2F;
+    /* Novo: Vermelho para o hover do botão excluir */
+
+    /* Cores por Status */
+    --cor-status-todo: #FFD700;
+    --cor-status-doing: #4D96FF;
+    --cor-status-done: #6BCB77;
+
+    /* Cores por Prioridade */
+    --cor-prioridade-alta: #FF6B6B;
+    --cor-prioridade-media: #FFD700;
+    --cor-prioridade-baixa: #6BCB77;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    line-height: 1.6;
+}
+
+/* --- 2. LAYOUT PRINCIPAL --- */
+.main-header {
+    background-color: var(--cor-superficie);
+    padding: 1rem 2rem;
+    text-align: center;
+    border-bottom: 2px solid var(--cor-status-todo);
+}
+
+.main-header h1 {
+    color: var(--cor-status-todo);
+}
+
+.main-nav {
+    background-color: var(--cor-fundo);
+    padding: 0.5rem 2rem;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.main-nav a {
+    color: var(--cor-texto-secundario);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: var(--cor-status-todo);
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.main-footer {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    color: var(--cor-texto-secundario);
+    border-top: 1px solid var(--cor-borda);
+}
+
+/* --- 3. SEÇÃO DO FORMULÁRIO --- */
+.task-section {
+    background-color: var(--cor-superficie);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--cor-borda);
+}
+
+#add-task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--cor-texto-secundario);
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    color: var(--cor-texto-principal);
+    font-family: 'Poppins', sans-serif;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--cor-status-todo);
+    box-shadow: 0 0 5px var(--cor-status-todo);
+}
+
+.submit-btn {
+    background-color: var(--cor-status-todo);
+    color: #000000;
+    font-weight: 700;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #ffd800d5;
+}
+
+/* --- 4. QUADRO DE TAREFAS (COLUNAS) --- */
+.task-board-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.task-column {
+    background-color: var(--cor-fundo);
+    flex: 1;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px dashed var(--cor-borda);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.task-column h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--cor-texto-secundario);
+    border-bottom: 2px solid var(--cor-borda);
+    padding-bottom: 0.5rem;
+}
+
+.task-list {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* --- 5. CARTÃO DE TAREFA --- */
+.task-card {
+    background-color: var(--cor-superficie);
+    padding: 1rem;
+    border-radius: 5px;
+    border-left: 5px solid;
+    border-bottom: 4px solid;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: grab;
+    transition: border-color 0.3s ease, opacity 0.3s ease;
+}
+
+.task-card.status-todo {
+    border-left-color: var(--cor-status-todo);
+}
+
+.task-card.status-doing {
+    border-left-color: var(--cor-status-doing);
+}
+
+.task-card.status-done {
+    border-left-color: var(--cor-status-done);
+}
+
+.task-card.alta {
+    border-bottom-color: var(--cor-prioridade-alta);
+}
+
+.task-card.media {
+    border-bottom-color: var(--cor-prioridade-media);
+}
+
+.task-card.baixa {
+    border-bottom-color: var(--cor-prioridade-baixa);
+}
+
+.task-card:active {
+    cursor: grabbing;
+}
+
+.task-card .task-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.task-card .task-description {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    margin: 0.5rem 0;
+}
+
+.task-actions {
+    margin-top: 1rem;
+    text-align: right;
+}
+
+/* Estilo da tag de prioridade */
+.task-priority {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    /* Deixando a fonte mais forte */
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* CORREÇÃO APLICADA AQUI: Seletores simplificados */
+.task-priority.alta {
+    background-color: var(--cor-prioridade-alta);
+    color: #121212;
+}
+
+.task-priority.media {
+    background-color: var(--cor-prioridade-media);
+    color: #121212;
+}
+
+.task-priority.baixa {
+    background-color: var(--cor-prioridade-baixa);
+    color: #121212;
+}
+
+/* NOVO ESTILO: Botão Excluir */
+.delete-btn {
+    background: transparent;
+    border: 1px solid var(--cor-borda);
+    color: var(--cor-texto-secundario);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.8rem;
+    cursor: pointer;
+    /* <--- Mãozinha ao passar o mouse */
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: var(--cor-excluir-hover);
+    color: var(--cor-texto-principal);
+    border-color: var(--cor-excluir-hover);
+}
+
+/* --- 6. ESTILOS PARA DRAG AND DROP --- */
+.task-card.dragging {
+    opacity: 0.5;
+    border-style: dashed;
+}
+
+.task-column.drag-over {
+    background-color: #2a2a2a;
+    border-color: var(--cor-status-doing);
+}
+
+/* --- 7. AJUSTES PARA TELAS PEQUENAS (RESPONSIVIDADE) --- */
+
+@media (max-width: 768px) {
+    
+    /* Faz o container principal ocupar mais da tela em celulares */
+    .main-content {
+        padding: 0 1rem; /* Diminui o espaçamento lateral */
+    }
+
+    /* A mágica acontece aqui: mudamos a direção do flexbox para coluna */
+    .task-board-container {
+        flex-direction: column; /* Empilha as colunas verticalmente */
+        gap: 2rem; /* Aumenta o espaço entre as colunas empilhadas */
+    }
+
+    .task-column h3 {
+        font-size: 1.2rem; /* Aumenta um pouco o título das colunas */
+    }
+
+    /* Garante que o formulário também tenha um bom espaçamento */
+    #add-task-form {
+        gap: 1.5rem;
+    }
+}
